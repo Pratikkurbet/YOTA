@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,15 +25,18 @@ import com.yash.yota.service.ParentTechnologyService;
  * Parent Technology Controller will facilitates CRUD functionalities
  */
 @RestController
+//TODO: in request mapping mention /boyota/parent-tech
 @RequestMapping("/yota/dashboard")
 public class ParentTechnologyController {
 	
 	@Autowired
 	private ParentTechnologyService parentTechnologyService;
 	
+	//TODO : return type should be ResponseEntity<?>, because it may send the exception as well.no need to specify additional url like /addTech 
 	@PostMapping("/addTech")
-	public ParentTechnology addParentTechnology(@Valid @RequestBody ParentTechnology technology)
+	public ParentTechnology addParentTechnology(@Valid @RequestBody ParentTechnology technology, BindingResult result)
 	{
+		//name, description not valid --- 
 		return parentTechnologyService.save(technology);
 	}
 	

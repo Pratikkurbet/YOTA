@@ -18,6 +18,7 @@ public class ParentTechnologyServiceImpl implements ParentTechnologyService{
 	@Autowired
 	private ParentTechnologyRepository parentTechnologyRepository;
 
+	//TODO : @Valid annotation should be used on Controller level
 	@Override
 	public ParentTechnology save(@Valid ParentTechnology technology) {
 		return parentTechnologyRepository.save(technology);
@@ -33,6 +34,7 @@ public class ParentTechnologyServiceImpl implements ParentTechnologyService{
 	public boolean removeTech(String name) {
 		ParentTechnology existParentTechnology=parentTechnologyRepository.getByName(name);
 		if (existParentTechnology!=null) {
+			
 			parentTechnologyRepository.deleteByName(name);
 			return true;
 		}

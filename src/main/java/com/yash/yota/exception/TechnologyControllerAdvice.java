@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 /*
  * This class will handle our exception globally.
+ * TODO :  Implement the GlobalException Handling mechanism
  */
 @ControllerAdvice
 public class TechnologyControllerAdvice {

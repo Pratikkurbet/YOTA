@@ -1,7 +1,5 @@
 package com.yash.yota.model;
-/*
- * This Parent Technology model is define what a technology consist of and useful for request which client side will send.
- */
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -22,6 +20,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * This ParentTechnology model will work as a data transfer object. Field
+ * validation will be performed here using jpa annotations.
+ * 
+ * @author pankaj.ssharma
+ *
+ */
 @Entity
 @Data
 @NoArgsConstructor
@@ -32,34 +37,51 @@ public class ParentTechnology {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	//Validation for Parent Technology Name
+
+	/**
+	 * name of the ParentTechnology, Name should not be empty
+	 */
 	@NotBlank(message = "Parent Technology Name should not be empty!")
 	private String name;
-	
-	//Validation for Parent Technology Description
+
+	/**
+	 * shortDescription of the ParentTechnology, should not be empty
+	 */
 	@NotBlank(message = "Description is required.")
 	private String shortDescription;
-	
+
 	private boolean status;
-	
-	//Validation for Parent Technology Creation Date
+
+	/**
+	 * createDate of the ParentTechnology, It will be automatically generated at the
+	 * time of record creation. You don't need to add the created date manually from
+	 * client end
+	 */
 	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date createdAt;
-	
-	//Validation for Parent Technology Updation Date
+
+	/**
+	 * upatedDate of the ParentTechnology, It will be automatically generated at the
+	 * time of record updation. You don't need to add the updated date manually from
+	 * client end
+	 */
 	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date updatedAt;
 
-	//@PrePersist means method will be called before the entity is inserted (persisted) into the database.
+	/**
+	 * This method will be called before the entity is inserted (persisted) into the
+	 * database.
+	 */
 	@PrePersist
 	public void onCreate() {
 		this.createdAt = new Date();
 	}
 
-	//@PreUpdate means method will be called before the entity is Updated in the database.
+	/**
+	 * This method will be called before the entity is updated in the database.
+	 */
 	@PreUpdate
 	public void onUpdate() {
 		this.updatedAt = new Date();
