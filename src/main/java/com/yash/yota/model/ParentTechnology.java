@@ -2,6 +2,7 @@ package com.yash.yota.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,6 +43,7 @@ public class ParentTechnology {
 	 * name of the ParentTechnology, Name should not be empty
 	 */
 	@NotBlank(message = "Parent Technology Name should not be empty!")
+	@Column(unique = true)
 	private String name;
 
 	/**
