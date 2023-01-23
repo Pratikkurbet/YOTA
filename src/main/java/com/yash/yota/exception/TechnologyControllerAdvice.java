@@ -13,21 +13,23 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * This class will handle our exception globally.
  * TODO :  Implement the GlobalException Handling mechanism
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class TechnologyControllerAdvice {
 
-	//This method handles validation error for our provided validation on field level.
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<List<String>> handleMethodArgumentNotValid(
-			MethodArgumentNotValidException methodArgumentNotValid) {
-		JSONArray jsonArray = new JSONArray(methodArgumentNotValid.getFieldErrors());
-		List<String> jsonDefaultMessageList = new ArrayList<>();
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-
-			jsonDefaultMessageList.add(jsonArray.getJSONObject(i).getString("defaultMessage"));
-
-		}
-		return new ResponseEntity<>(jsonDefaultMessageList, HttpStatus.NOT_ACCEPTABLE);
-	}
+	//TODO : This method handles validation error for our provided validation on field level.
+	/*
+	  @ExceptionHandler(MethodArgumentNotValidException.class) public
+	  ResponseEntity<List<String>> handleMethodArgumentNotValid(
+	  MethodArgumentNotValidException methodArgumentNotValid) { JSONArray jsonArray
+	  = new JSONArray(methodArgumentNotValid.getFieldErrors()); List<String>
+	  jsonDefaultMessageList = new ArrayList<>();
+	  
+	  for (int i = 0; i < jsonArray.length(); i++) {
+	  
+	  jsonDefaultMessageList.add(jsonArray.getJSONObject(i).getString(
+	  "defaultMessage"));
+	  
+	  } return new ResponseEntity<>(jsonDefaultMessageList,
+	  HttpStatus.NOT_ACCEPTABLE); } */
+	 
 }

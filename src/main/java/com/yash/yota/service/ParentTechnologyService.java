@@ -28,10 +28,10 @@ public interface ParentTechnologyService {
 
 	/**
 	 * removeTech method will remove the technology that is mentioned
-	 * @param name of the ParentTechnology to be removed
+	 * @param id of the ParentTechnology to be removed
 	 * @return true if removed, otherwise false, in case technology is not available then it should throw appropriate exception.
 	 */
-	boolean removeTech(String name);
+	void removeTech(long id);
 
 	/**
 	 * this updateTech method will update the technology detail of the existing technology

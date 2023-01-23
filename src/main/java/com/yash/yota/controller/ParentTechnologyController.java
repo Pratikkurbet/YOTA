@@ -20,58 +20,63 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yash.yota.model.ParentTechnology;
 import com.yash.yota.service.ParentTechnologyService;
+import com.yash.yota.service.TechnologyValidationService;
 
 /*
  * Parent Technology Controller will facilitates CRUD functionalities
  */
+
 @RestController
 //TODO: in request mapping mention /boyota/parent-tech
-@RequestMapping("/yota/dashboard")
+@RequestMapping("/yota/parent-tech")
 public class ParentTechnologyController {
 	
 	@Autowired
 	private ParentTechnologyService parentTechnologyService;
 	
+	@Autowired
+	private TechnologyValidationService validationService;
+	
 	//TODO : return type should be ResponseEntity<?>, because it may send the exception as well.no need to specify additional url like /addTech 
-	@PostMapping("/addTech")
-	public ParentTechnology addParentTechnology(@Valid @RequestBody ParentTechnology technology, BindingResult result)
+	@PostMapping("/")
+	public ResponseEntity<?> addParentTechnology(@Valid @RequestBody ParentTechnology technology, BindingResult result)
 	{
-		//name, description not valid --- 
-		return parentTechnologyService.save(technology);
+		ResponseEntity<?> errorMap= validationService.validationError(result);
+		if (errorMap!=null) {
+			return errorMap;
+		}
+		return new ResponseEntity<ParentTechnology>(parentTechnologyService.save(technology),HttpStatus.OK);
+	}
+	//TODO : 
+	@GetMapping("/")
+	public ResponseEntity<List<ParentTechnology>> getAll()
+	{
+		return new ResponseEntity<List<ParentTechnology>>(parentTechnologyService.getAllTechs(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/getAllTech")
-	public List<ParentTechnology> getAll()
+	@GetMapping("/{name}")
+	public ResponseEntity<ParentTechnology> getTech(@RequestParam("name") String name)
 	{
-		return parentTechnologyService.getAllTechs();
+		return new ResponseEntity<ParentTechnology>(parentTechnologyService.getTech(name),HttpStatus.OK);
 	}
 	
-	@GetMapping("/getTech/{name}")
-	public ParentTechnology getTech(@RequestParam("name") String name)
-	{
-		return parentTechnologyService.getTech(name);
-	}
-	
-	@GetMapping("/searchTech/{keyword}")
-	public List<ParentTechnology> searchTech(@PathVariable("keyword") String keyword)
+	@GetMapping("/search/{keyword}")
+	public ResponseEntity<List<ParentTechnology>> searchTech(@PathVariable("keyword") String keyword)
 	{
 		List<ParentTechnology> technologies=parentTechnologyService.searchTech(keyword);
-		return technologies;
+		return new ResponseEntity<List<ParentTechnology>>(technologies,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/removeTech/{name}")
-	public ResponseEntity<?> removeTech(@RequestParam("name") String name)
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> removeTech(@RequestParam long id)
 	{
-		boolean result=parentTechnologyService.removeTech(name);
-		if (result) {
-			return new ResponseEntity<>("Technology Deleted",HttpStatus.OK);
-		}
-		return new ResponseEntity<>("Technology not Deleted",HttpStatus.OK);
+		 parentTechnologyService.removeTech(id);
+		 return new ResponseEntity<String>("Technology with ID :"+id+" deleted.", HttpStatus.OK);
 	}
 	
-	@PutMapping("/updateTech")
-	public ParentTechnology upadateTech(@Valid @RequestBody ParentTechnology technology)
+	@PutMapping("/")
+	public ResponseEntity<ParentTechnology> upadateTech(@Valid @RequestBody ParentTechnology technology)
 	{
-		return parentTechnologyService.updateTech(technology);
+		return new ResponseEntity<ParentTechnology>(parentTechnologyService.updateTech(technology),HttpStatus.OK);
 	}
 }
