@@ -1,7 +1,5 @@
 package com.yash.yota.config;
-/**
- * This Swagger Configuration will provide you API Documentation on the go swagger-ui.html link.
- */
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +11,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * This SwaggerConfic component will be used for API Documentation. Do not change anything over here. 
  * It will be a global configuration. 
+ * visit the swagger ui on : swagger-ui.html link.
  * @author pankaj.ssharma
  *
  */
@@ -20,10 +19,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
     
+
 	/**
 	 * This method basically scans all api's under specified packages for documentation
 	 */
 	
+
 	@Bean
 	Docket apiDocumentation()
 	{

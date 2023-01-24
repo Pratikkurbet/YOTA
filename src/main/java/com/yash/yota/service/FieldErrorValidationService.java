@@ -9,15 +9,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
+
 /**
  * This FieldErrorValidationService Component will help to map the Field Error in errorMap. 
  * This can be used with any model error mapping. 
  * @author pankaj.ssharma
- *
+
  */
 @Service
 public class FieldErrorValidationService {
 	
+	/**
+	 * @param result
+	 * @return It returns the field name with its validation error
+	 */
 	public ResponseEntity<?> validationError(BindingResult result)
 	{
 		if (result.hasErrors()) {
