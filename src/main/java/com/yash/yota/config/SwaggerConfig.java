@@ -1,5 +1,5 @@
 package com.yash.yota.config;
-/*
+/**
  * This Swagger Configuration will provide you API Documentation on the go swagger-ui.html link.
  */
 import org.springframework.context.annotation.Bean;

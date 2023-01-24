@@ -22,12 +22,15 @@ import com.yash.yota.model.ParentTechnology;
 import com.yash.yota.service.ParentTechnologyService;
 import com.yash.yota.service.TechnologyValidationService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 /*
  * Parent Technology Controller will facilitates CRUD functionalities
  */
 
+@Api(tags = "ParentTechnologyController",value = "Controller of Parent Technology")
 @RestController
-//TODO: in request mapping mention /boyota/parent-tech
 @RequestMapping("/yota/parent-tech")
 public class ParentTechnologyController {
 	
@@ -38,6 +41,7 @@ public class ParentTechnologyController {
 	private TechnologyValidationService validationService;
 	
 	//TODO : return type should be ResponseEntity<?>, because it may send the exception as well. 
+	@ApiOperation(tags ="Post Technology",value = "Add Technology")
 	@PostMapping("/")
 	public ResponseEntity<?> addParentTechnology(@Valid @RequestBody ParentTechnology technology, BindingResult result)
 	{
@@ -48,18 +52,21 @@ public class ParentTechnologyController {
 		return new ResponseEntity<ParentTechnology>(parentTechnologyService.save(technology),HttpStatus.OK);
 	}
 	//TODO : 
+	@ApiOperation(tags ="Get Technology",value = "Get All Technology")
 	@GetMapping("/")
 	public ResponseEntity<List<ParentTechnology>> getAll()
 	{
 		return new ResponseEntity<List<ParentTechnology>>(parentTechnologyService.getAllTechs(),HttpStatus.OK);
 	}
 	
+	@ApiOperation(tags ="Get Technology",value = "Get Technology by Name")
 	@GetMapping("/{name}")
 	public ResponseEntity<ParentTechnology> getTech(@RequestParam(value ="name") String name)
 	{
 		return new ResponseEntity<ParentTechnology>(parentTechnologyService.getTech(name),HttpStatus.OK);
 	}
 	
+	@ApiOperation(tags ="Get Technology",value = "Get Technology by Keyword")
 	@GetMapping("/search/{keyword}")
 	public ResponseEntity<List<ParentTechnology>> searchTech(@PathVariable("keyword") String keyword)
 	{
@@ -67,6 +74,7 @@ public class ParentTechnologyController {
 		return new ResponseEntity<List<ParentTechnology>>(technologies,HttpStatus.OK);
 	}
 	
+	@ApiOperation(tags ="Delete Technology",value = "Delete Technology by Id")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> removeTech(@PathVariable(value = "id") long id)
 	{
@@ -74,6 +82,7 @@ public class ParentTechnologyController {
 		 return new ResponseEntity<String>("Technology with ID :"+id+" deleted.", HttpStatus.OK);
 	}
 	
+	@ApiOperation(tags ="Update Technology",value = "Update Technology")
 	@PutMapping("/")
 	public ResponseEntity<?> upadateTech(@Valid @RequestBody ParentTechnology technology,BindingResult result)
 	{
