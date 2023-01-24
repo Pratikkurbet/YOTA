@@ -1,5 +1,5 @@
 package com.yash.yota.repository;
-/*
+/**
  * Repository layer will communicate with DB layer
  */
 import java.util.List;
