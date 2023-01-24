@@ -10,11 +10,20 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * This SwaggerConfic component will be used for API Documentation. Do not change anything over here. 
+ * It will be a global configuration. 
+ * @author pankaj.ssharma
+ *
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
     
-	//TODO : This method basically scans all api's under specified packages for documentation
+	/**
+	 * This method basically scans all api's under specified packages for documentation
+	 */
+	
 	@Bean
 	Docket apiDocumentation()
 	{

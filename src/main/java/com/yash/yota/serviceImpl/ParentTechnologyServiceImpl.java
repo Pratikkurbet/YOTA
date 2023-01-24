@@ -7,26 +7,30 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yash.yota.exception.TechnologyException;
-import com.yash.yota.exception.TechnologyNotFoundException;
+import com.yash.yota.exception.ParentTechnologyException;
+import com.yash.yota.exception.ParentTechnologyNotFoundException;
 import com.yash.yota.model.ParentTechnology;
 import com.yash.yota.repository.ParentTechnologyRepository;
 import com.yash.yota.service.ParentTechnologyService;
-
+/**
+ * 
+ * @author pankaj.ssharma
+ *
+ */
 @Service
 public class ParentTechnologyServiceImpl implements ParentTechnologyService{
 	
 	@Autowired
 	private ParentTechnologyRepository parentTechnologyRepository;
 
-	//TODO : @Valid annotation should be used on Controller level
+	
 	@Override
 	public ParentTechnology save(ParentTechnology technology) {
 		try {
 			technology.setName(technology.getName().toUpperCase());
 			return parentTechnologyRepository.save(technology);
 		} catch (Exception e) {
-			throw new TechnologyException("Technology : "+technology.getName().toUpperCase()+" already exists!!");
+			throw new ParentTechnologyException("Technology : "+technology.getName().toUpperCase()+" already exists!!");
 		}
 	}
 
@@ -40,7 +44,7 @@ public class ParentTechnologyServiceImpl implements ParentTechnologyService{
 	public void removeTech(long id) {
 		ParentTechnology parentTechnology=parentTechnologyRepository.findById(id).get();
 		if (parentTechnology==null) {
-			throw new TechnologyException("Technology with ID :"+id+" does not exist");
+			throw new ParentTechnologyException("Technology with ID :"+id+" does not exist");
 		}
 		parentTechnologyRepository.deleteById(id);
 		
@@ -65,7 +69,7 @@ public class ParentTechnologyServiceImpl implements ParentTechnologyService{
 	public ParentTechnology getTech(String name) {
 		ParentTechnology technology=parentTechnologyRepository.getByName(name);
 		if (technology==null) {
-			throw new TechnologyNotFoundException("Technology with name : "+name+" does not exist");
+			throw new ParentTechnologyNotFoundException("Technology with name : "+name+" does not exist");
 		}
 		return technology;
 	}
@@ -74,7 +78,7 @@ public class ParentTechnologyServiceImpl implements ParentTechnologyService{
 	public List<ParentTechnology> searchTech(String keyword) {
 		List<ParentTechnology> list=parentTechnologyRepository.getByNameContaining(keyword.toUpperCase());
 		if (list.isEmpty()) {
-			throw new TechnologyNotFoundException("Technology containing keyword  : "+keyword+" does not exist");
+			throw new ParentTechnologyNotFoundException("Technology containing keyword  : "+keyword+" does not exist");
 		}
 		return parentTechnologyRepository.getByNameContaining(keyword.toUpperCase());
 	}

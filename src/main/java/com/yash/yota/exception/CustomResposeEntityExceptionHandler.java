@@ -13,16 +13,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomResposeEntityExceptionHandler extends ResponseEntityExceptionHandler
 {
 	@ExceptionHandler
-	public final ResponseEntity<?> handleTechnologyException(TechnologyException technologyException,WebRequest request)
+	public final ResponseEntity<?> handleTechnologyException(ParentTechnologyException technologyException,WebRequest request)
 	{
-		TechnologyExceptionResponse response= new TechnologyExceptionResponse(technologyException.getMessage());
+		ParentTechnologyExceptionResponse response= new ParentTechnologyExceptionResponse(technologyException.getMessage());
 		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler
-	public final ResponseEntity<?> handleTechnologyNotFoundException(TechnologyNotFoundException technologyException,WebRequest request)
+	public final ResponseEntity<?> handleTechnologyNotFoundException(ParentTechnologyNotFoundException technologyException,WebRequest request)
 	{
-		TechnologyExceptionResponse response= new TechnologyExceptionResponse(technologyException.getMessage());
+		ParentTechnologyExceptionResponse response= new ParentTechnologyExceptionResponse(technologyException.getMessage());
 		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
 	}
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yash.yota.model.ParentTechnology;
 import com.yash.yota.service.ParentTechnologyService;
-import com.yash.yota.service.TechnologyValidationService;
+import com.yash.yota.service.FieldErrorValidationService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,9 +38,9 @@ public class ParentTechnologyController {
 	private ParentTechnologyService parentTechnologyService;
 	
 	@Autowired
-	private TechnologyValidationService validationService;
+	private FieldErrorValidationService validationService;
 	
-	//TODO : return type should be ResponseEntity<?>, because it may send the exception as well. 
+	
 	@ApiOperation(tags ="Post Technology",value = "Add Technology")
 	@PostMapping("/")
 	public ResponseEntity<?> addParentTechnology(@Valid @RequestBody ParentTechnology technology, BindingResult result)
@@ -51,7 +51,7 @@ public class ParentTechnologyController {
 		}
 		return new ResponseEntity<ParentTechnology>(parentTechnologyService.save(technology),HttpStatus.OK);
 	}
-	//TODO : 
+	
 	@ApiOperation(tags ="Get Technology",value = "Get All Technology")
 	@GetMapping("/")
 	public ResponseEntity<List<ParentTechnology>> getAll()
