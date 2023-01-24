@@ -37,7 +37,7 @@ public class ParentTechnologyController {
 	@Autowired
 	private TechnologyValidationService validationService;
 	
-	//TODO : return type should be ResponseEntity<?>, because it may send the exception as well.no need to specify additional url like /addTech 
+	//TODO : return type should be ResponseEntity<?>, because it may send the exception as well. 
 	@PostMapping("/")
 	public ResponseEntity<?> addParentTechnology(@Valid @RequestBody ParentTechnology technology, BindingResult result)
 	{
@@ -55,7 +55,7 @@ public class ParentTechnologyController {
 	}
 	
 	@GetMapping("/{name}")
-	public ResponseEntity<ParentTechnology> getTech(@RequestParam("name") String name)
+	public ResponseEntity<ParentTechnology> getTech(@RequestParam(value ="name") String name)
 	{
 		return new ResponseEntity<ParentTechnology>(parentTechnologyService.getTech(name),HttpStatus.OK);
 	}
@@ -68,15 +68,19 @@ public class ParentTechnologyController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> removeTech(@RequestParam long id)
+	public ResponseEntity<?> removeTech(@PathVariable(value = "id") long id)
 	{
 		 parentTechnologyService.removeTech(id);
 		 return new ResponseEntity<String>("Technology with ID :"+id+" deleted.", HttpStatus.OK);
 	}
 	
 	@PutMapping("/")
-	public ResponseEntity<ParentTechnology> upadateTech(@Valid @RequestBody ParentTechnology technology)
+	public ResponseEntity<?> upadateTech(@Valid @RequestBody ParentTechnology technology,BindingResult result)
 	{
+		ResponseEntity<?> errorMap= validationService.validationError(result);
+		if (errorMap!=null) {
+			return errorMap;
+		}
 		return new ResponseEntity<ParentTechnology>(parentTechnologyService.updateTech(technology),HttpStatus.OK);
 	}
 }

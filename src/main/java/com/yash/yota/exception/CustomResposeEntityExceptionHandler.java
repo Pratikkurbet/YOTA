@@ -18,4 +18,11 @@ public class CustomResposeEntityExceptionHandler extends ResponseEntityException
 		TechnologyExceptionResponse response= new TechnologyExceptionResponse(technologyException.getMessage());
 		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler
+	public final ResponseEntity<?> handleTechnologyNotFoundException(TechnologyNotFoundException technologyException,WebRequest request)
+	{
+		TechnologyExceptionResponse response= new TechnologyExceptionResponse(technologyException.getMessage());
+		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
+	}
 }

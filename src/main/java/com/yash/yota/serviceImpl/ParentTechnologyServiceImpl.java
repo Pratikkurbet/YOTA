@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yash.yota.exception.TechnologyException;
+import com.yash.yota.exception.TechnologyNotFoundException;
 import com.yash.yota.model.ParentTechnology;
 import com.yash.yota.repository.ParentTechnologyRepository;
 import com.yash.yota.service.ParentTechnologyService;
@@ -64,14 +65,18 @@ public class ParentTechnologyServiceImpl implements ParentTechnologyService{
 	public ParentTechnology getTech(String name) {
 		ParentTechnology technology=parentTechnologyRepository.getByName(name);
 		if (technology==null) {
-			throw new TechnologyException("Technology with name : "+name+" does not exist");
+			throw new TechnologyNotFoundException("Technology with name : "+name+" does not exist");
 		}
 		return technology;
 	}
 
 	@Override
 	public List<ParentTechnology> searchTech(String keyword) {
-		return parentTechnologyRepository.getByNameContaining(keyword);
+		List<ParentTechnology> list=parentTechnologyRepository.getByNameContaining(keyword.toUpperCase());
+		if (list.isEmpty()) {
+			throw new TechnologyNotFoundException("Technology containing keyword  : "+keyword+" does not exist");
+		}
+		return parentTechnologyRepository.getByNameContaining(keyword.toUpperCase());
 	}
 
 }

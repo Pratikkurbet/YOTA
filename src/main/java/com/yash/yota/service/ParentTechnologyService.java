@@ -2,8 +2,6 @@ package com.yash.yota.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import com.yash.yota.model.ParentTechnology;
 
 /**
@@ -38,11 +36,20 @@ public interface ParentTechnologyService {
 	 * @param technology to be updated
 	 * @return Updated ParentTechnology
 	 */
-	ParentTechnology updateTech(@Valid ParentTechnology technology);
+	ParentTechnology updateTech(ParentTechnology technology);
 
-	
+	/**
+	 * this getTech method will get the technology detail from 
+	 * DB based on its name only
+	 * @return ParentTechnolgy
+	 */
 	ParentTechnology getTech(String name);
-
+	
+	/**
+	 * This searchTech enables us to search free text get the list of technologies
+	 * @param keyword in upper case
+	 * @return if there are any ParentTechnology by that keyword
+	 */
 	List<ParentTechnology> searchTech(String keyword);
 
 }
