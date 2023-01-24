@@ -1,5 +1,9 @@
 package com.yash.yota.exception;
 
+/**This is a custom exception class for POST,PUT request
+ * @author pratik.kurbet
+ *
+ */
 public class TechnologyException extends RuntimeException {
 
 	/**

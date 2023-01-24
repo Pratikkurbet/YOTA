@@ -8,17 +8,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+/**This is global exception handler class which returns proper error message
+ * @author pratik.kurbet
+ *
+ */
 @ControllerAdvice
 @RestController
 public class CustomResposeEntityExceptionHandler extends ResponseEntityExceptionHandler
 {
+	/**
+	 * 
+	 * @param technologyException,
+	 * @param request
+	 * @return This method handle technology exception for POST,PUT request for ParentTechnologyController
+	 */
 	@ExceptionHandler
 	public final ResponseEntity<?> handleTechnologyException(TechnologyException technologyException,WebRequest request)
 	{
 		TechnologyExceptionResponse response= new TechnologyExceptionResponse(technologyException.getMessage());
 		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
 	}
-	
+	/**
+	 * 
+	 * @param TechnologyNotFoundException,
+	 * @param request
+	 * @return This method handle technology not found exception for GET request for ParentTechnologyController
+	 */
 	@ExceptionHandler
 	public final ResponseEntity<?> handleTechnologyNotFoundException(TechnologyNotFoundException technologyException,WebRequest request)
 	{

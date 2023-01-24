@@ -1,5 +1,9 @@
 package com.yash.yota.exception;
 
+/** This is a custom exception class for GET request
+ * @author pratik.kurbet
+ *
+ */
 public class TechnologyNotFoundException extends RuntimeException{
 
 	/**
