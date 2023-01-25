@@ -21,6 +21,9 @@ import com.yash.yota.service.ParentTechnologyService;
 @Service
 public class ParentTechnologyServiceImpl implements ParentTechnologyService{
 	
+	/**
+	 * ParentTechnologyRepository is used to interact service layer with repository layer.
+	 */
 	@Autowired
 	private ParentTechnologyRepository parentTechnologyRepository;
 

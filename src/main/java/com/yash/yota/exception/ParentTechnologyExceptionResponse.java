@@ -17,6 +17,8 @@ import lombok.Setter;
 @Getter
 
 public class ParentTechnologyExceptionResponse {
-
+	/**
+	 * This errorMessage field is used to customize the exception response.
+	 */
 	private String errorMessage;
 }

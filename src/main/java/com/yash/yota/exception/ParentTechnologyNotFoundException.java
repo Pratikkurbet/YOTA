@@ -1,5 +1,12 @@
 package com.yash.yota.exception;
 
+/**
+ * This is an unchecked exception. This will be creating the TechnologyNotFoundException Object for two purpose. 
+ * 1: To test Technology Exception at the time of TDD, this will be done by Default Constructor. 
+ * 2: To create the customized Exception message, this will be done by Parameterized Constructor. 
+ * @author pratik.kurbet
+ *
+ */
 public class ParentTechnologyNotFoundException extends RuntimeException{
 
 	/**
