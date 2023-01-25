@@ -27,7 +27,7 @@ public interface ParentTechnologyService {
 	/**
 	 * removeTech method will remove the technology that is mentioned
 	 * @param id of the ParentTechnology to be removed
-	 * @return true if removed, otherwise false, in case technology is not available then it should throw appropriate exception.
+	 *  true if removed, otherwise false, in case technology is not available then it should throw appropriate exception.
 	 */
 	void removeTech(long id);
 

@@ -30,7 +30,7 @@ public class CustomResposeEntityExceptionHandler extends ResponseEntityException
 	}
 	/**
 	 * 
-	 * @param TechnologyNotFoundException,
+	 * @param technologyException,
 	 * @param request
 	 * @return This method handle technology not found exception for GET request for ParentTechnologyController
 	 */

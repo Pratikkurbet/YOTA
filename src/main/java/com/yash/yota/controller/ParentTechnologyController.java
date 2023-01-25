@@ -49,7 +49,7 @@ public class ParentTechnologyController {
 	
 	/**
 	 * addParentTechnology method is used add ParentTechnology through service layer
-	 * @param ParentTechnology 
+	 * @param technology 
 	 * @return generic type 
 	 */
 	@ApiOperation(tags ="Post Technology",value = "Add Technology")

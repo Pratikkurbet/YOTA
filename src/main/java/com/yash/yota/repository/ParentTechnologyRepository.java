@@ -10,8 +10,8 @@ import com.yash.yota.model.ParentTechnology;
 
 /**
  * ParentTechnologyRepository will perform all the CRUD Operations on ParentTechnology. 
- * In case if any customization is required on CRUD operations, it can be done here. 
- * Always extend JPARepository<Type,SerialVersionId>
+ * In case if any customization is required on CRUD operations, it can be done here and 
+ * Always extend JPARepository with Type,SerialVersionId
  * @author pankaj.ssharma
  *
  */
